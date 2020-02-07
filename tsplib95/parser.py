@@ -114,7 +114,8 @@ def process_key_value(data, stream):
     try:
         parser = VALUE_TYPES[key]
     except KeyError:
-        raise ParsingError(f'{key} is not a valid keyword')
+        # raise ParsingError(f'{key} is not a valid keyword')
+        print(f'{key} is not a valid keyword -- skipping')
     data[key] = parser(value)
     next(stream)
     return process_line
