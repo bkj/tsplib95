@@ -8,6 +8,7 @@ VALUE_TYPES = {
     'COMMENT': str,
     'DIMENSION': int,
     'CAPACITY': int,
+    'VEHICLES': int,
     'EDGE_WEIGHT_TYPE': str,
     'EDGE_WEIGHT_FORMAT': str,
     'EDGE_DATA_FORMAT': str,
@@ -112,11 +113,11 @@ def process_line(data, stream):
 def process_key_value(data, stream):
     key, value = split_kv(stream.line)
     try:
-        parser = VALUE_TYPES[key]
+        data[key] = VALUE_TYPES[key](value)
     except KeyError:
         # raise ParsingError(f'{key} is not a valid keyword')
         print(f'{key} is not a valid keyword -- skipping')
-    data[key] = parser(value)
+    
     next(stream)
     return process_line
 
