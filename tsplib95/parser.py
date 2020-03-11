@@ -7,6 +7,7 @@ VALUE_TYPES = {
     'TYPE': str,
     'COMMENT': str,
     'DIMENSION': int,
+    'DISTANCE': int,
     'CAPACITY': int,
     'VEHICLES': int,
     'EDGE_WEIGHT_TYPE': str,
