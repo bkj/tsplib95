@@ -117,7 +117,8 @@ def process_key_value(data, stream):
         data[key] = VALUE_TYPES[key](value)
     except KeyError:
         # raise ParsingError(f'{key} is not a valid keyword')
-        print(f'{key} is not a valid keyword -- skipping')
+        # print(f'{key} is not a valid keyword -- skipping')
+        pass
     
     next(stream)
     return process_line
@@ -139,8 +140,9 @@ def process_key(data, stream):
     try:
         return key_parsers[key]
     except KeyError:
-#         raise ParsingError(f'{key} is not a valid keyword')
-        print(f'{key} is not a valid keyword -- skipping')
+        # raise ParsingError(f'{key} is not a valid keyword')
+        # print(f'{key} is not a valid keyword -- skipping')
+        pass
 
 
 def parse_node_coords(data, stream):
