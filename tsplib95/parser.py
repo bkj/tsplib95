@@ -10,6 +10,7 @@ VALUE_TYPES = {
     'DISTANCE': int,
     'CAPACITY': int,
     'VEHICLES': int,
+    'STOPS_LIMIT' : int,
     'EDGE_WEIGHT_TYPE': str,
     'EDGE_WEIGHT_FORMAT': str,
     'EDGE_DATA_FORMAT': str,
