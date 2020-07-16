@@ -10,6 +10,8 @@ VALUE_TYPES = {
     'DISTANCE': int,
     'CAPACITY': int,
     'VEHICLES': int,
+    'SCALE': int,
+    'SERVICE_TIME': int,
     'STOPS_LIMIT' : int,
     'EDGE_WEIGHT_TYPE': str,
     'EDGE_WEIGHT_FORMAT': str,
@@ -137,6 +139,7 @@ def process_key(data, stream):
         'DISPLAY_DATA_SECTION': parse_display_data,
         'TOUR_SECTION': parse_tours,
         'EDGE_WEIGHT_SECTION': parse_edge_weights,
+        'TIME_WINDOW_SECTION': parse_time_window,
     }
     try:
         return key_parsers[key]
@@ -213,6 +216,27 @@ def parse_demands(data, stream):
 
     return process_line
 
+def parse_time_window(data, stream):
+    section = data['TIME_WINDOW_SECTION'] = {}
+
+    while True:
+        if stream.line is None:
+            break
+
+        try:
+            index, tw_start, tw_end = stream.line.split()
+        except ValueError:
+            break
+
+        try:
+            index, tw_start, tw_end = int(index), int(tw_start), int(tw_end)
+        except ValueError:
+            break
+
+        section[index] = (tw_start, tw_end)
+        next(stream)
+
+    return process_line
 
 def parse_edge_data(data, stream):
     edge_format = data['EDGE_DATA_FORMAT']
